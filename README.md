@@ -306,10 +306,9 @@ Training showed continuous improvement from random noise to recognizable human f
 
 ## Early Training
 
-Replace with your image:
 
 ```markdown
-![Epoch 20](images/epoch20.png)
+![Epoch 20](generated_images/epoch_20.png)
 ```
 
 ## Mid Training
