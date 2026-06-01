@@ -264,8 +264,11 @@ BETA_2 = 0.9
 ## Generated Images
 
 ### Epoch 20
-
-![Epoch 20](images/epoch20.png)
+<p align="center">
+  <img src="generated_images/epoch_20.png" width="300">
+  <br>
+  <b>Epoch 20 Output</b>
+</p>
 
 ### Epoch 50
 
