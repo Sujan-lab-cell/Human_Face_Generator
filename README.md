@@ -288,7 +288,7 @@ Generated images gradually evolved from noise to recognizable face structures wi
 
 # Loss Curve
 
-![Loss Curve](graphs/loss_curve.png)
+![Loss Curve](generated_images/loss_curve.png)
 
 The Generator and Critic losses gradually stabilized, indicating balanced adversarial training and improved convergence.
 
