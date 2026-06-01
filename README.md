@@ -3,6 +3,7 @@
 A deep learning project that generates realistic human face images from random noise using a Wasserstein Generative Adversarial Network with Gradient Penalty (WGAN-GP). The model is trained on a custom dataset of 2,776 face images and implemented using TensorFlow/Keras on Kaggle GPU.
 
 ---
+Note:This Project is On progress
 
 # Table of Contents
 
