@@ -430,17 +430,287 @@ Confirmed preprocessing pipeline was correct.
 
 ---
 
-# Future Improvements
+## Training Evaluation
 
-* Train on larger datasets
-* Generate higher-resolution faces
+### Training Stability
+
+The Generator and Critic losses gradually stabilized during training, indicating balanced adversarial learning.
+
+Final observed values:
+
+| Metric         | Value   |
+| -------------- | ------- |
+| Generator Loss | ~6.57   |
+| Critic Loss    | ~-10.36 |
+
+Observations:
+
+* Stable training throughout later epochs
+* No sudden spikes in losses
+* No exploding gradients
+* No training divergence
+* Critic and Generator remained balanced
+
+---
+
+### Generated Image Quality
+
+The model successfully learned:
+
+* Human facial structure
+* Hair patterns
+* Clothing appearance
+* ID card patterns
+* Background color distribution
+* Male and female face variations
+
+Generated images evolved from random noise into recognizable face images.
+
+Limitations:
+
+* Images remain slightly blurry
+* Fine facial details are not fully learned
+* Eye and hair textures require improvement
+* Limited by 64×64 image resolution
+
+---
+
+### Mode Collapse Analysis
+
+Mode collapse occurs when a GAN repeatedly generates the same image.
+
+Results:
+
+✅ Different face shapes generated
+
+✅ Different hairstyles generated
+
+✅ Different genders generated
+
+✅ Different facial structures generated
+
+Conclusion:
+
+The model did not exhibit significant mode collapse.
+
+---
+
+### Divergence Analysis
+
+Training divergence occurs when Generator and Critic losses become unstable or explode.
+
+Checks performed:
+
+* Loss monitoring
+* NaN detection
+* Visual inspection of generated samples
+
+Results:
+
+```text
+Generator NaN: False
+Critic NaN: False
+```
+
+Conclusion:
+
+No divergence was observed during training.
+
+---
+
+### Inception Score Evaluation
+
+The trained model was evaluated using Inception Score (IS).
+
+Results:
+
+```text
+Inception Score : 1.4075
+Std             : 0.0429
+```
+
+Interpretation:
+
+* Indicates limited image sharpness
+* Expected due to small dataset size
+* Expected due to 64×64 image resolution
+* Generated images are visually better than the score alone suggests
+
+---
+
+## Experimental Improvements
+
+Several improvements were introduced during development:
+
+### Architecture Improvements
+
+* Implemented WGAN-GP instead of Vanilla GAN
+* Added Gradient Penalty
+* Removed Sigmoid activation from Critic
+* Removed Dropout layers from Critic
+* Used LeakyReLU activations
+* Used Batch Normalization in Generator
+
+### Training Improvements
+
+* Balanced Generator and Critic learning rates
+* Tuned Critic iterations
+* Used Adam optimizer with WGAN-GP parameters
+* Implemented checkpoint saving
+* Added TensorBoard logging
+* Added automatic image generation after every epoch
+
+### Dataset Improvements
+
+* Verified image normalization range
+* Applied online data augmentation
+* Implemented shuffle and prefetch pipeline
+* Removed invalid image files
+
+---
+
+## Key Challenges Faced
+
+### 1. Generated Images Were Pure Noise
+
+Issue:
+
+* Early epochs generated random noisy patterns.
+
+Resolution:
+
+* Trained for more epochs.
+* Tuned WGAN-GP hyperparameters.
+* Balanced Generator and Critic learning rates.
+
+---
+
+### 2. Critic Became Too Strong
+
+Issue:
+
+```text
+Generator Loss ≈ -1000
+Critic Loss ≈ -6000
+```
+
+Resolution:
+
+* Reduced Critic dominance.
+* Adjusted Critic iterations.
+* Rebalanced learning rates.
+
+---
+
+### 3. Dropout Reduced Critic Performance
+
+Issue:
+
+* Critic learned weak image features.
+
+Resolution:
+
+* Removed all Dropout layers from Critic.
+
+Result:
+
+* Better feature extraction.
+* Faster convergence.
+
+---
+
+### 4. Old Generated Images Caused Confusion
+
+Issue:
+
+* Previous experiment images remained in the output directory.
+
+Resolution:
+
+```python
+shutil.rmtree(GENERATED_DIR, ignore_errors=True)
+os.makedirs(GENERATED_DIR, exist_ok=True)
+```
+
+---
+
+### 5. Old Checkpoints Affected Experiments
+
+Issue:
+
+* Training accidentally resumed from previous checkpoints.
+
+Resolution:
+
+```python
+shutil.rmtree(CHECKPOINT_DIR, ignore_errors=True)
+os.makedirs(CHECKPOINT_DIR, exist_ok=True)
+```
+
+---
+
+### 6. Dataset Verification
+
+Issue:
+
+* Generated images appeared washed out and blurry.
+
+Investigation:
+
+Verified normalization:
+
+```python
+images.min()
+images.max()
+```
+
+Output:
+
+```text
+-1.0
+1.0
+```
+
+Conclusion:
+
+Preprocessing pipeline was correct.
+
+---
+
+## Performance Summary
+
+| Metric            | Result       |
+| ----------------- | ------------ |
+| Dataset Size      | 2,776 Images |
+| Resolution        | 64×64        |
+| GAN Type          | WGAN-GP      |
+| Training Stable   | Yes          |
+| Mode Collapse     | No           |
+| Divergence        | No           |
+| NaN Losses        | No           |
+| Inception Score   | 1.4075       |
+| Checkpointing     | Yes          |
+| Data Augmentation | Yes          |
+| GPU Training      | Yes          |
+
+---
+
+## Future Improvements
+
+Planned improvements:
+
+* Train on 128×128 images
+* Train on 256×256 images
+* Increase dataset size
 * Implement Spectral Normalization
 * Calculate FID Score
-* Calculate Inception Score
-* Upgrade to StyleGAN2
+* Add Progressive Growing GAN
+* Experiment with StyleGAN2
+* Improve image sharpness
 * Deploy using Streamlit
-* Add latent space interpolation
-* Support 128×128 and 256×256 image generation
+* Add latent space interpolation visualization
+* Generate higher-quality student face images
+
 
 ---
 
