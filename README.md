@@ -268,41 +268,47 @@ BETA_2 = 0.9
 * Training Monitoring
 
 ---
-
 # Results
 
 ## Generated Images
 
 ### Epoch 20
+
 <p align="center">
   <img src="generated_images/epoch_20.png" width="300">
   <br>
   <b>Epoch 20 Output</b>
 </p>
 
-### Epoch 50
+### Epoch 80
 
-![Epoch 50](images/epoch50.png)
+<p align="center">
+  <img src="generated_images/epoch_80.png" width="300">
+  <br>
+  <b>Epoch 80 Output</b>
+</p>
 
-### Epoch 75
+### Epoch 130 (Best Result)
 
-![Epoch 75](images/epoch75.png)
+<p align="center">
+  <img src="generated_images/epoch_130 .png" width="300">
+  <br>
+  <b>Epoch 130 Output</b>
+</p>
 
-### Epoch 100
+### Epoch 220
 
-![Epoch 100](images/epoch100.png)
+<p align="center">
+  <img src="generated_images/epoch_210 .png" width="300">
+  <br>
+  <b>Epoch 220 Output</b>
+</p>
 
-Generated images gradually evolved from noise to recognizable face structures with facial features, hair, background, and clothing patterns.
+Generated images gradually evolved from random noise into recognizable human faces.
 
----
+The best visual quality was achieved around Epoch 130. Training beyond this point produced only marginal improvements and eventually led to a slight reduction in image diversity and sharpness.
 
-# Loss Curve
 
-![Loss Curve](generated_images/loss_curve.png)
-
-The Generator and Critic losses gradually stabilized, indicating balanced adversarial training and improved convergence.
-
----
 
 # Problems Faced
 
