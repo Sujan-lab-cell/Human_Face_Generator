@@ -308,7 +308,15 @@ Generated images gradually evolved from random noise into recognizable human fac
 
 The best visual quality was achieved around Epoch 130. Training beyond this point produced only marginal improvements and eventually led to a slight reduction in image diversity and sharpness.
 
+# Loss Curve
 
+<p align="center">
+  <img src="generated_images/loss_curve(2).png" width="700">
+  <br>
+  <b>Generator and Critic Loss During Training</b>
+</p>
+
+The Generator and Critic losses gradually stabilized during training, indicating balanced adversarial learning and stable WGAN-GP convergence. No significant divergence or mode collapse was observed throughout training.
 
 # Problems Faced
 
