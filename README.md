@@ -311,7 +311,7 @@ The best visual quality was achieved around Epoch 130. Training beyond this poin
 # Loss Curve
 
 <p align="center">
-  <img src="generated_images/loss_curve(2).png" width="700">
+  <img src="generated_images/loss_curve (2).png" width="700">
   <br>
   <b>Generator and Critic Loss During Training</b>
 </p>
