@@ -2,6 +2,8 @@
 
 ## Table of Contents
 
+## Table of Contents
+
 * [Overview](#overview)
 * [Objectives](#objectives)
 * [Dataset Description](#dataset-description)
@@ -19,7 +21,15 @@
 * [Loss Curve](#loss-curve)
 * [Problems Faced](#problems-faced)
 * [Solutions Implemented](#solutions-implemented)
+* [Performance Summary](#performance-summary)
+* [Extended Training Experiments](#extended-training-experiments)
+* [Quantitative Evaluation](#quantitative-evaluation)
+* [Additional Validation Checks](#additional-validation-checks)
+* [Lessons Learned](#lessons-learned)
+* [Current Project Status](#current-project-status)
 * [Future Improvements](#future-improvements)
+* [Author](#author)
+
 
 ---
 
@@ -98,7 +108,7 @@ Implemented:
 
 ```python
 RandomFlip("horizontal")
-RandomBrightness(0.05)
+
 ```
 
 Benefits:
@@ -695,21 +705,167 @@ Preprocessing pipeline was correct.
 
 ---
 
+## Extended Training Experiments
+
+To analyze the effect of longer training durations, additional experiments were performed beyond the initial training phase.
+
+### Training Progress
+
+| Epoch | Observation                                                          |
+| ----- | -------------------------------------------------------------------- |
+| 20    | Faces became recognizable but remained blurry                        |
+| 80    | Clear facial structures emerged with improved background consistency |
+| 130   | Best visual quality achieved with stable facial features             |
+| 220   | Slight degradation observed in image sharpness and diversity         |
+
+### Best Performing Epoch
+
+Among all experiments, the checkpoint around **Epoch 130** produced the most visually convincing results.
+
+Observed improvements:
+
+* Better facial alignment
+* Improved hairstyle generation
+* More realistic clothing patterns
+* Better separation between face and background
+* Reduced random artifacts
+
+### Effect of Extended Training
+
+Training beyond 130 epochs did not significantly improve image quality.
+
+Observed at 220 epochs:
+
+* Slight reduction in image diversity
+* Increased facial similarity between samples
+* Marginal decrease in sharpness
+* Lower Inception Score
+
+This indicates that additional training was not beneficial for the current dataset size and model configuration.
+
+---
+
+## Quantitative Evaluation
+
+### Inception Score
+
+The trained model was evaluated using the Inception Score metric.
+
+| Epoch | Inception Score |
+| ----- | --------------- |
+| 130   | 1.4075 ± 0.0429 |
+| 220   | ~1.30           |
+
+### Interpretation
+
+The decrease in score after prolonged training suggests:
+
+* Limited benefit from additional epochs
+* Possible beginning of overfitting
+* Reduced output diversity
+
+Because the dataset contains only 2,776 images and uses a resolution of 64×64, the obtained score is considered reasonable for this experimental setup.
+
+---
+
+## Additional Validation Checks
+
+Several checks were performed to verify training quality.
+
+### NaN Detection
+
+Results:
+
+```text
+Generator NaN : False
+Critic NaN    : False
+```
+
+No numerical instability was detected during training.
+
+### Training Stability
+
+Observed:
+
+* Smooth Generator loss curve
+* Smooth Critic loss curve
+* No exploding gradients
+* No sudden oscillations
+
+Result:
+
+✅ Stable WGAN-GP training
+
+### Diversity Check
+
+Generated samples were visually inspected.
+
+Observed:
+
+* Multiple face shapes
+* Multiple hairstyles
+* Male and female faces
+* Different facial structures
+
+Result:
+
+✅ No significant mode collapse detected
+
+---
+
+## Lessons Learned
+
+Through experimentation, several practical observations were made:
+
+* WGAN-GP provides significantly more stable training than a standard GAN.
+* Removing Dropout from the Critic improved learning quality.
+* Dataset quality affects results more than increasing epochs.
+* Training longer does not always produce better images.
+* Monitoring generated samples is more informative than monitoring loss values alone.
+* Clearing checkpoints and generated images before new experiments avoids misleading results.
+* Small datasets limit achievable image quality regardless of training duration.
+
+---
+
+## Current Project Status
+
+Current model capabilities:
+
+✅ Generates realistic face-like images
+
+✅ Produces diverse face structures
+
+✅ Learns background and clothing patterns
+
+✅ Stable training without divergence
+
+✅ No significant mode collapse
+
+Limitations:
+
+❌ Images remain slightly blurry
+
+❌ Fine facial details are not fully captured
+
+❌ Limited by 64×64 resolution
+
+❌ Limited by dataset size (2,776 images)
+
+❌ Inception Score remains relatively low
+
+
 ## Future Improvements
 
 Planned improvements:
 
-* Train on 128×128 images
-* Train on 256×256 images
-* Increase dataset size
-* Implement Spectral Normalization
-* Calculate FID Score
-* Add Progressive Growing GAN
-* Experiment with StyleGAN2
-* Improve image sharpness
-* Deploy using Streamlit
-* Add latent space interpolation visualization
-* Generate higher-quality student face images
+* Increase dataset size beyond 10,000 images
+* Train using 128×128 resolution images
+* Experiment with adaptive augmentation
+* Compute FID Score for stronger evaluation
+* Explore StyleGAN2 and StyleGAN3 architectures
+* Perform latent space exploration and interpolation
+* Introduce attention mechanisms in the Generator
+* Use mixed precision training for faster convergence
 
 
 ---
