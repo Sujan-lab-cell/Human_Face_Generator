@@ -66,7 +66,7 @@ The model learns the underlying distribution of human faces and generates new sy
 Dataset contains student face images captured under relatively similar lighting and background conditions.
 ## Notebook
 
-[View Complete Training Notebook](https://github.com/your-username/Human_Face_Generator/blob/main/human-face-generator.ipynb)
+[View Complete Training Notebook](https://www.kaggle.com/code/sujanksgowdas/human-face-generator)
 ---
 
 # Requirements
