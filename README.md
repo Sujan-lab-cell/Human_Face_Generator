@@ -64,7 +64,9 @@ The model learns the underlying distribution of human faces and generates new sy
 | Normalization | [-1, 1]             |
 
 Dataset contains student face images captured under relatively similar lighting and background conditions.
+## Notebook
 
+[View Complete Training Notebook](https://github.com/your-username/Human_Face_Generator/blob/main/human-face-generator.ipynb)
 ---
 
 # Requirements
