@@ -302,7 +302,6 @@ Flatten
 Dense(1)
 ```
 Output:
-
 Single Wasserstein Score
 
 The Critic receives a 128×128 RGB image and learns to distinguish real images from generated images using the Wasserstein loss.
@@ -316,12 +315,10 @@ Results:
 * Improved mouth generation
 * More realistic facial appearance
 ## Metrics:
-
+```text
 Inception Score: 1.4404
 Std: 0.0573
-
----
-
+```
 ## Experiment 2: Face Cropping + 64×64 Resolution
 
 After evaluating the 128×128 model, the architecture was modified to generate 64×64 images and training was continued using the same cropped-face dataset.
