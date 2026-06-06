@@ -256,7 +256,8 @@ Results:
 Metrics:
 
 ```text
-Inception Score ≈ 1.41
+Inception Score: 1.4404
+Std: 0.0573
 ```
 
 ---
@@ -312,7 +313,8 @@ Results:
 Metrics:
 
 ```text
-Inception Score ≈ 1.51
+Inception Score: 1.5075
+Std: 0.0952
 ```
 
 ---
@@ -323,7 +325,7 @@ Inception Score ≈ 1.51
 | ---------------- | ----------- | ------------- |
 | Face Cropping    | Yes         | Yes           |
 | Resolution       | 64×64       | 128×128       |
-| Inception Score  | ~1.41       | ~1.51         |
+| Inception Score  | 1.4404      | 1.5075         |
 | Face Quality     | Good        | Better        |
 | Eye Details      | Limited     | Improved      |
 | Mouth Details    | Limited     | Improved      |
@@ -390,28 +392,12 @@ BETA_2 = 0.9
 
 ## Generated Images
 
-### Epoch 20
+## Architecture Comparison
 
-```html
-<img src="generated_images/epoch_20.png" width="300">
-```
-
-### Epoch 50
-
-```html
-<img src="generated_images/epoch_50.png" width="300">
-```
-
-### Epoch 100
-
-```html
-<img src="generated_images/epoch_100.png" width="300">
-```
-
-### Epoch 133
-
-```html
-<img src="generated_images/epoch_133.png" width="300">
+| 64×64 Model | 128×128 Model |
+|-------------|---------------|
+| <img src="generated_images/64_epoch_130.png" width="300"> | <img src="generated_images/128_epoch_133.png" width="300"> |
+| Best 64×64 Output | Best 128×128 Output |
 ```
 
 The model gradually learned:
