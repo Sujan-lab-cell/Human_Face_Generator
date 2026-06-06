@@ -28,7 +28,7 @@
 
 This project implements a Wasserstein Generative Adversarial Network with Gradient Penalty (WGAN-GP) to generate realistic human face images from random noise vectors.
 
-The model was trained on a custom dataset of student face images and improved through multiple experiments involving face cropping, checkpoint management, loss monitoring, and image quality evaluation.
+The model was trained on a custom dataset of student face images and improved through multiple experiments involving face cropping, checkpoint management, loss monitoring, and image quality evaluation[...]
 
 ---
 
@@ -49,7 +49,7 @@ The model was trained on a custom dataset of student face images and improved th
 | ------------- | ------------------- |
 | Dataset Type  | Custom Face Dataset |
 | Total Images  | 2,776               |
-| Resolution    | 64×64               |
+| Resolution    | 64×64 and 128×128   |
 | Channels      | RGB                 |
 | Format        | JPG / PNG           |
 | Normalization | [-1,1]              |
@@ -381,10 +381,10 @@ Output:
 
 ### Single Wasserstein Score
 
-The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP design principles.
+The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP des[...]
 Single Wasserstein Score
 
-The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP design principles.
+The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP des[...]
 ## 64×64×3 Face Image
 Results:
 
