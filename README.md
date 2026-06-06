@@ -490,7 +490,7 @@ Inception Score: 1.4404 ± 0.0573
 ## 64×64 Architecture
 
 <p align="center">
-  <img src="graphs/loss_curve_64.png" width="700">
+  <img src="Genreated_Images_2/image.png" width="700">
 </p>
 
 Observations:
