@@ -587,12 +587,7 @@ Early training produced blurry noise patterns instead of recognizable faces.
 
 ## 2. Critic Became Too Strong
 
-Observed:
-
-```text
-Generator Loss ≈ -1000
-Critic Loss ≈ -6000
-```
+The Critic model became overly powerful, resulting in unstable training dynamics where the Generator struggled to learn meaningful patterns. This was evident from diverging loss values and poor image quality improvements during training.
 
 Result:
 
@@ -615,7 +610,34 @@ Generated image folders contained outputs from previous runs.
 
 ## 5. Blurry Eyes and Mouth Regions
 
-Facial details were difficult to learn due to low resolution and background distractions.
+Issue:
+
+Although the model learned overall facial structure, it struggled to generate detailed eyes, mouths, and facial textures.
+
+Possible Causes:
+
+* Small dataset size (2,776 images)
+* Complex facial features
+* Limited image diversity
+* Background information distracting the model
+
+Impact:
+
+* Slightly blurry eyes
+* Inconsistent mouth generation
+* Reduced image realism
+
+---
+
+## 6. Low Inception Score
+
+Observed:
+
+```text
+Initial Inception Score ≈ 1.44
+```
+
+The generated images initially had a lower Inception Score, indicating poor semantic quality and diversity. The model struggled to generate highly realistic and varied facial features that would be recognized as natural by the Inception network.
 
 ---
 
