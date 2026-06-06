@@ -14,6 +14,7 @@
   * [Generator](#generator)
   * [Critic](#critic)
 * [Training Configuration](#training-configuration)
+* [Loss Curve Analysis](#loss-curve-analysis)
 * [Features](#features)
 * [Results](#results)
 * [Training Evaluation](#training-evaluation)
@@ -28,7 +29,7 @@
 
 This project implements a Wasserstein Generative Adversarial Network with Gradient Penalty (WGAN-GP) to generate realistic human face images from random noise vectors.
 
-The model was trained on a custom dataset of student face images and improved through multiple experiments involving face cropping, checkpoint management, loss monitoring, and image quality evaluation[...]
+The model was trained on a custom dataset of student face images and improved through multiple experiments involving face cropping, checkpoint management, loss monitoring, and image quality evaluation.
 
 ---
 
@@ -378,11 +379,8 @@ Output:
 
 ### Single Wasserstein Score
 
-The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP des[...]
-Single Wasserstein Score
+The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP design.
 
-The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP des[...]
-## 64×64×3 Face Image
 Results:
 
 * More stable training
@@ -465,6 +463,65 @@ BETA_2 = 0.9
 
 ---
 
+# Loss Curve Analysis
+
+## 128×128 Architecture
+
+<p align="center">
+  <img src="graphs/loss_curve_128.png" width="700">
+</p>
+
+Observations:
+
+* Large loss fluctuations during early epochs.
+* Critic initially dominated Generator learning.
+* Training eventually stabilized.
+* Higher computational complexity.
+* Lower Inception Score compared to the 64×64 model.
+
+Metrics:
+
+```text
+Inception Score: 1.4404 ± 0.0573
+```
+
+---
+
+## 64×64 Architecture
+
+<p align="center">
+  <img src="graphs/loss_curve_64.png" width="700">
+</p>
+
+Observations:
+
+* Smooth Generator and Critic loss curves.
+* Stable adversarial training.
+* Better Generator-Critic balance.
+* Faster convergence.
+* Improved image quality on the available dataset.
+
+Metrics:
+
+```text
+Inception Score: 1.5075 ± 0.0952
+```
+
+---
+
+## Conclusion
+
+Although the 128×128 architecture generated higher-resolution images, the 64×64 architecture achieved:
+
+* More stable training
+* Better convergence
+* Higher Inception Score
+* Better overall performance on the dataset of 2,776 cropped face images
+
+The 64×64 model was selected as the final model for this project.
+
+---
+
 # Features
 
 * WGAN-GP Implementation
@@ -492,7 +549,6 @@ BETA_2 = 0.9
 | <img src="Genreated_Images_2/epoch_20.jpeg" width="500"> | <img src="Genreated_Images_2/epoch_99.png" width="500"> |
 | <img src="Genreated_Images_2/epoch_1_1.png" width="600"> | <img src="Genreated_Images_2/last.jpeg" width="600"> |
 | Best 64×64 Output | Best 128×128 Output |
-```
 
 The model gradually learned:
 
@@ -589,7 +645,7 @@ Early training produced blurry noise patterns instead of recognizable faces.
 
 ## 2. Critic Became Too Strong
 
-The Critic model became overly powerful, resulting in unstable training dynamics where the Generator struggled to learn meaningful patterns. This was evident from diverging loss values and poor image quality improvements during training.
+The Critic model became overly powerful, resulting in unstable training dynamics where the Generator struggled to learn meaningful patterns. This was evident from diverging loss values and poor image quality.
 
 Result:
 
@@ -639,7 +695,7 @@ Observed:
 Initial Inception Score ≈ 1.44
 ```
 
-The generated images initially had a lower Inception Score, indicating poor semantic quality and diversity. The model struggled to generate highly realistic and varied facial features that would be recognized as natural by the Inception network.
+The generated images initially had a lower Inception Score, indicating poor semantic quality and diversity. The model struggled to generate highly realistic and varied facial features.
 
 ---
 
