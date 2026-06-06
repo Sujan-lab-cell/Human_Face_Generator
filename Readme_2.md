@@ -236,35 +236,15 @@ During development, multiple experiments were performed to improve image quality
 
 ---
 
-## Experiment 1: Face Cropping + 64×64 Resolution
+## Experiment 1: Face Cropping + 128×128 Resolution
 
-The dataset was first preprocessed using Haar Cascade face detection to crop and center facial regions before training.
+The dataset was preprocessed using Haar Cascade face detection to crop and center facial regions before training.
 
 Configuration:
 
 * Face Cropping: Enabled
-* Image Resolution: 64×64
+* Image Resolution: 128×128
 * GAN Type: WGAN-GP
-
-Results:
-
-* Generated recognizable faces
-* Learned facial structure and background patterns
-* Images remained slightly blurry
-* Fine details such as eyes and mouth were not consistently generated
-
-Metrics:
-
-```text
-Inception Score: 1.4404
-Std: 0.0573
-```
-
----
-
-## Experiment 2: Face Cropping + 128×128 Resolution
-
-To improve facial detail generation, the training resolution was increased from 64×64 to 128×128 while continuing to use the cropped-face dataset.
 
 ### Generator Architecture
 
@@ -295,61 +275,176 @@ Conv2DTranspose (3)
 ↓
 Tanh
 ```
+## Critic Architecture (128×128 Model)
+```text
+Input:
 
+128×128×3 Image
+↓
+Conv2D (64)
+↓
+LeakyReLU
+↓
+Conv2D (128)
+↓
+LeakyReLU
+↓
+Conv2D (256)
+↓
+LeakyReLU
+↓
+Conv2D (512)
+↓
+LeakyReLU
+↓
+Flatten
+↓
+Dense(1)
+```
 Output:
 
-```text
-128×128×3 Face Image
-```
+Single Wasserstein Score
+
+The Critic receives a 128×128 RGB image and learns to distinguish real images from generated images using the Wasserstein loss.
+Output:
 
 Results:
 
+* Generated recognizable face structures
 * Better facial symmetry
 * Improved eye placement
 * Improved mouth generation
-* More realistic facial features
-* Improved overall visual quality
+* More realistic facial appearance
+## Metrics:
 
-Metrics:
+Inception Score: 1.4404
+Std: 0.0573
 
+---
+
+## Experiment 2: Face Cropping + 64×64 Resolution
+
+After evaluating the 128×128 model, the architecture was modified to generate 64×64 images and training was continued using the same cropped-face dataset.
+
+### Generator Architecture
+
+```text
+100-D Noise Vector
+↓
+Dense (4×4×512)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (256)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (128)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (64)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (3)
+↓
+Tanh
+```
+### Critic Architecture (64×64 Model)
+```text
+Input:
+
+64×64×3 Image
+↓
+Conv2D (64)
+↓
+LeakyReLU
+↓
+Conv2D (128)
+↓
+LeakyReLU
+↓
+Conv2D (256)
+↓
+LeakyReLU
+↓
+Conv2D (512)
+↓
+LeakyReLU
+↓
+Flatten
+↓
+Dense(1)
+```
+Output:
+
+### Single Wasserstein Score
+
+The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP design principles.
+Single Wasserstein Score
+
+The Critic receives a 64×64 RGB image and evaluates its realism. After reducing the resolution from 128×128 to 64×64, the Critic input size was updated accordingly while maintaining the WGAN-GP design principles.
+## 64×64×3 Face Image
+Results:
+
+* More stable training
+* Better overall face consistency
+* Improved facial structure generation
+* Cleaner outputs with fewer artifacts
+* Higher Inception Score
+### Metrics:
 ```text
 Inception Score: 1.5075
 Std: 0.0952
 ```
 
+Observation:
+
+Although the 128×128 model generated higher-resolution images, the 64×64 model achieved a higher Inception Score and produced more consistent results on the available dataset of 2,776 face images.
+
+# Comparison Bwtween first and Second Arhitecture Change
+
+| Feature            | 128×128 Model | 64×64 Model |
+| ------------------ | ------------- | ----------- |
+| Face Cropping      | Yes           | Yes         |
+| Resolution         | 128×128       | 64×64       |
+| Generator Output | 128×128×3     | 64×64×3     |
+| Critic Input     | 128×128×3     | 64×64×3     |
+| Inception Score    | 1.4404        | 1.5075      |
+| Face Quality       | Good          | Better      |
+| Training Stability | Good          | Better      |
+| Training Time      | Higher        | Lower       |
+| GPU Memory Usage   | Higher        | Lower       |
+
 ---
 
-## Comparison
 
-| Feature          | 64×64 Model | 128×128 Model |
-| ---------------- | ----------- | ------------- |
-| Face Cropping    | Yes         | Yes           |
-| Resolution       | 64×64       | 128×128       |
-| Inception Score  | 1.4404      | 1.5075         |
-| Face Quality     | Good        | Better        |
-| Eye Details      | Limited     | Improved      |
-| Mouth Details    | Limited     | Improved      |
-| Training Time    | Lower       | Higher        |
-| GPU Memory Usage | Lower       | Higher        |
+## Analysis
+
+Interestingly, reducing the output resolution from 128×128 to 64×64 resulted in a higher Inception Score.
+
+Possible reasons:
+
+* The dataset size (2,776 images) was relatively small for high-quality 128×128 generation.
+* The model learned facial structures more effectively at 64×64 resolution.
+* Lower resolution reduced training complexity and improved convergence.
+* Face cropping allowed the model to focus on facial features rather than background information.
 
 ---
 
 ## Conclusion
 
-The 128×128 model trained on cropped facial images produced the best results.
-
-Key improvements:
-
-* Higher image quality
-* Better facial feature generation
-* Improved Inception Score
-* More realistic face structures
+The final 64×64 model trained on cropped facial images achieved the best quantitative performance.
 
 Final Best Result:
 
 ```text
 Inception Score: 1.5075 ± 0.0952
 ```
+
+This experiment demonstrated that, for the current dataset size, a well-trained 64×64 WGAN-GP produced better results than the higher-resolution 128×128 version.
+
 
 # Training Configuration
 
