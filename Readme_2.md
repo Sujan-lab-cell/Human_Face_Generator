@@ -488,10 +488,9 @@ BETA_2 = 0.9
 
 | 128×128 Model | 64×64 Model |
 |-------------|---------------|
-| <img src="Genreated_Images_2/epoch_1.png" width="300"> | <img src="Genreated_Images_2/epoch_1_1.png" width="300"> |
- 128×128 Model | 64×64 Model |
-| <img src="Genreated_Images_2/epoch_20.jpeg" width="300"> | <img src="Genreated_Images_2/epoch_99.png" width="300"> |
-| <img src="Genreated_Images_2/epoch_1_1.png" width="300"> | <img src="Genreated_Images_2/last.png" width="300"> |
+| <img src="Genreated_Images_2/epoch_1.png" width="500"> | <img src="Genreated_Images_2/epoch_1_1.png" width="500"> |
+| <img src="Genreated_Images_2/epoch_20.jpeg" width="500"> | <img src="Genreated_Images_2/epoch_99.png" width="500"> |
+| <img src="Genreated_Images_2/epoch_1_1.png" width="500"> | <img src="Genreated_Images_2/last.jpeg" width="500"> |
 | Best 64×64 Output | Best 128×128 Output |
 ```
 
