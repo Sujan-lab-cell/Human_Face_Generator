@@ -576,7 +576,7 @@ Std             : 0.0952
 
 Observation:
 
-Face cropping improved image quality and increased the Inception Score compared to earlier experiments.
+Face cropping improved facial feature learning, while the final 64×64 architecture achieved a higher Inception Score (1.5075) than the earlier 128×128 architecture (1.4404).
 
 ---
 
