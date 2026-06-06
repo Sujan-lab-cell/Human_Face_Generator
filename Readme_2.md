@@ -230,6 +230,124 @@ Notes:
 Implemented according to WGAN-GP recommendations.
 
 ---
+# Architecture Evolution
+
+During development, multiple experiments were performed to improve image quality and training stability.
+
+---
+
+## Experiment 1: Face Cropping + 64×64 Resolution
+
+The dataset was first preprocessed using Haar Cascade face detection to crop and center facial regions before training.
+
+Configuration:
+
+* Face Cropping: Enabled
+* Image Resolution: 64×64
+* GAN Type: WGAN-GP
+
+Results:
+
+* Generated recognizable faces
+* Learned facial structure and background patterns
+* Images remained slightly blurry
+* Fine details such as eyes and mouth were not consistently generated
+
+Metrics:
+
+```text
+Inception Score ≈ 1.41
+```
+
+---
+
+## Experiment 2: Face Cropping + 128×128 Resolution
+
+To improve facial detail generation, the training resolution was increased from 64×64 to 128×128 while continuing to use the cropped-face dataset.
+
+### Generator Architecture
+
+```text
+100-D Noise Vector
+↓
+Dense (4×4×512)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (256)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (128)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (64)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (32)
+↓
+BatchNorm + LeakyReLU
+↓
+Conv2DTranspose (3)
+↓
+Tanh
+```
+
+Output:
+
+```text
+128×128×3 Face Image
+```
+
+Results:
+
+* Better facial symmetry
+* Improved eye placement
+* Improved mouth generation
+* More realistic facial features
+* Improved overall visual quality
+
+Metrics:
+
+```text
+Inception Score ≈ 1.51
+```
+
+---
+
+## Comparison
+
+| Feature          | 64×64 Model | 128×128 Model |
+| ---------------- | ----------- | ------------- |
+| Face Cropping    | Yes         | Yes           |
+| Resolution       | 64×64       | 128×128       |
+| Inception Score  | ~1.41       | ~1.51         |
+| Face Quality     | Good        | Better        |
+| Eye Details      | Limited     | Improved      |
+| Mouth Details    | Limited     | Improved      |
+| Training Time    | Lower       | Higher        |
+| GPU Memory Usage | Lower       | Higher        |
+
+---
+
+## Conclusion
+
+The 128×128 model trained on cropped facial images produced the best results.
+
+Key improvements:
+
+* Higher image quality
+* Better facial feature generation
+* Improved Inception Score
+* More realistic face structures
+
+Final Best Result:
+
+```text
+Inception Score: 1.5075 ± 0.0952
+```
 
 # Training Configuration
 
