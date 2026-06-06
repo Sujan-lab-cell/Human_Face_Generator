@@ -694,7 +694,8 @@ IS = 1.5075 ± 0.0952
 | Metric          | Result       |
 | --------------- | ------------ |
 | Dataset Size    | 2,776 Images |
-| Resolution      | 64×64        |
+| Best Resolution | 64×64        |
+| Additional Experiment | 128×128 |
 | GAN Type        | WGAN-GP      |
 | Face Cropping   | Yes          |
 | Training Stable | Yes          |
