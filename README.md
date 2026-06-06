@@ -468,7 +468,7 @@ BETA_2 = 0.9
 ## 128×128 Architecture
 
 <p align="center">
-  <img src="graphs/loss_curve_128.png" width="700">
+  <img src="Genreated_Images_2/image_2.png" width="700">
 </p>
 
 Observations:
