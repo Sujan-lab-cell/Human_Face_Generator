@@ -486,9 +486,12 @@ BETA_2 = 0.9
 
 ## Architecture Comparison
 
-| 64×64 Model | 128×128 Model |
+| 128×128 Model | 64×64 Model |
 |-------------|---------------|
-| <img src="generated_images/64_epoch_130.png" width="300"> | <img src="generated_images/128_epoch_133.png" width="300"> |
+| <img src="Genreated_Images_2/epoch_1.png" width="300"> | <img src="Genreated_Images_2/epoch_1_1.png" width="300"> |
+ 128×128 Model | 64×64 Model |
+| <img src="Genreated_Images_2/epoch_1.png" width="300"> | <img src="Genreated_Images_2/epoch_1_1.png" width="300"> |
+| <img src="Genreated_Images_2/epoch_1.png" width="300"> | <img src="Genreated_Images_2/epoch_1_1.png" width="300"> |
 | Best 64×64 Output | Best 128×128 Output |
 ```
 
