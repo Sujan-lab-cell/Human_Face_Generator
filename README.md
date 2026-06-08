@@ -32,7 +32,10 @@ This project implements a Wasserstein Generative Adversarial Network with Gradie
 The model was trained on a custom dataset of student face images and improved through multiple experiments involving face cropping, checkpoint management, loss monitoring, and image quality evaluation.
 
 ---
-
+# Notebook Name :
+```text
+image-gen (1).ipynb
+```
 # Objectives
 
 * Generate realistic human face images.
@@ -797,7 +800,6 @@ IS = 1.5075 ± 0.0952
 * Deploy using Streamlit.
 
 ---
-
 # Author
 
 **Sujan K S**
